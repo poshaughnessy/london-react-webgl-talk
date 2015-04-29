@@ -1,5 +1,5 @@
-# Combining React and WebGL for 2D & 3D Web Apps
+## London React: Combining React and WebGL for 2D & 3D Web Apps
 
-A presentation for the London React meetup group.
+A presentation I'm preparing for the London React meetup group, May 2015.
 
 Coming soon...
