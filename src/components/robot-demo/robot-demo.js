@@ -23,21 +23,12 @@ class RobotDemoComponent extends React.Component {
     }
 
     componentDidMount() {
-
-        console.log('componentDidMount', this.props);
-
-        console.log('this._animate', this._animate);
-
         this.rAF = requestAnimationFrame(this._animate);
-
     }
 
     componentWillUnmount() {
 
         if( this.rAF ) {
-
-            console.log('Cancel animation frame');
-
             cancelAnimationFrame(this.rAF);
         }
 
