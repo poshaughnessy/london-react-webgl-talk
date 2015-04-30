@@ -14,7 +14,7 @@ class RobotDemoComponent extends React.Component {
     constructor() {
 
         this.state = {
-            robotPosition: new THREE.Vector3(0,0,0),
+            robotPosition: new THREE.Vector3(0,-35,0),
             robotMovingForwards: true
         };
 

@@ -8,8 +8,10 @@ class Slide2Component extends BaseSlideComponent {
 
         return (
             <div className={'slide ' + (this._isVisible() ? 'show' : 'hide')}>
-                <h2>Demo</h2>
                 <RobotDemo animating={this._isVisible()}/>
+                <div className="contents top">
+                    <h2>Demo</h2>
+                </div>
             </div>
         );
 
