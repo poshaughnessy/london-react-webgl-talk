@@ -3,7 +3,45 @@ import ReactTHREE from 'react-three';
 import RobotComponent from './robot';
 import THREE from 'three';
 
+const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+const cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+const ROBOT_Z_NEAR = 50;
+const ROBOT_Z_FAR = 0;
+const ROBOT_MOVE_RATE = 0.1;
+
 class RobotDemoComponent extends React.Component {
+
+    constructor() {
+
+        this.state = {
+            robotPosition: new THREE.Vector3(0,0,0),
+            robotMovingForwards: true
+        };
+
+        this._animate = this._animate.bind(this);
+
+    }
+
+    componentDidMount() {
+
+        console.log('componentDidMount', this.props);
+
+        console.log('this._animate', this._animate);
+
+        this.rAF = requestAnimationFrame(this._animate);
+
+    }
+
+    componentWillUnmount() {
+
+        if( this.rAF ) {
+
+            console.log('Cancel animation frame');
+
+            cancelAnimationFrame(this.rAF);
+        }
+
+    }
 
     render() {
 
@@ -23,8 +61,7 @@ class RobotDemoComponent extends React.Component {
         let RobotElement = React.createElement(
             RobotComponent,
             {
-                onLoad: this.onRobotLoaded,
-                position: this.props.robotPosition || new THREE.Vector3(0,0,0)
+                position: this.state.robotPosition
             }
         );
 
@@ -71,10 +108,50 @@ class RobotDemoComponent extends React.Component {
         )
     }
 
+    _animate() {
+
+        if( this.props.animating ) {
+
+            let robotZ = this.state.robotPosition.z;
+
+            if (this.state.robotMovingForwards) {
+
+                if (robotZ < ROBOT_Z_NEAR) {
+
+                    let newPosition = this.state.robotPosition;
+                    newPosition.z += ROBOT_MOVE_RATE;
+
+                    this.setState({robotPosition: newPosition});
+
+                } else {
+                    this.setState({robotMovingForwards: false});
+                }
+
+            } else {
+
+                if (robotZ > ROBOT_Z_FAR) {
+
+                    let newPosition = this.state.robotPosition;
+                    newPosition.z -= ROBOT_MOVE_RATE;
+
+                    this.setState({robotPosition: newPosition});
+
+                } else {
+                    this.setState({robotMovingForwards: true});
+                }
+
+            }
+
+        }
+
+        requestAnimationFrame( this._animate );
+
+    }
+
 }
 
 RobotDemoComponent.propTypes = {
-    robotPosition: React.PropTypes.instanceOf(THREE.Vector3)
+    animating: React.PropTypes.bool
 };
 
 export default RobotDemoComponent;

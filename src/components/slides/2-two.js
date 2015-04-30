@@ -1,13 +1,15 @@
 import React from 'react';
 import BaseSlideComponent from './base-slide';
+import RobotDemo from '../robot-demo/robot-demo';
 
 class Slide2Component extends BaseSlideComponent {
 
     render() {
 
         return (
-            <div className={'slide ' + (this.isVisible() ? 'show' : 'hide')}>
-                Slide TWO!
+            <div className={'slide ' + (this._isVisible() ? 'show' : 'hide')}>
+                <h2>Demo</h2>
+                <RobotDemo animating={this._isVisible()}/>
             </div>
         );
 

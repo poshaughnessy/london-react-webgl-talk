@@ -2,6 +2,8 @@ import React from 'react';
 import Slide1 from './slides/1-intro';
 import Slide2 from './slides/2-two';
 
+const LAST_SLIDE_NUM = 2;
+
 class AppComponent extends React.Component {
 
     constructor(props) {
@@ -10,18 +12,18 @@ class AppComponent extends React.Component {
             currentSlideNum: props.initialSlideNum
         };
 
-        this.onKeyUp = this.onKeyUp.bind(this);
-        this.onLeft = this.onLeft.bind(this);
-        this.onRight = this.onRight.bind(this);
+        this._onKeyUp = this._onKeyUp.bind(this);
+        this._onLeft = this._onLeft.bind(this);
+        this._onRight = this._onRight.bind(this);
 
     }
 
     componentDidMount() {
-        document.addEventListener('keyup', this.onKeyUp);
+        document.addEventListener('keyup', this._onKeyUp);
     }
 
     componentWillUnmount() {
-        document.removeEventListener('keyup', this.onKeyUp);
+        document.removeEventListener('keyup', this._onKeyUp);
     }
 
     render() {
@@ -33,42 +35,38 @@ class AppComponent extends React.Component {
         )
     }
 
-    onKeyUp(e) {
+    _onKeyUp(e) {
 
         console.log('onKeyUp', e);
 
         switch( e.keyCode ) {
             case 37: // left arrow
-                this.onLeft();
+                this._onLeft();
                 break;
             case 39: // right arrow
-                this.onRight();
+                this._onRight();
                 break;
         }
     }
 
-    onLeft() {
+    _onLeft() {
 
-        console.log('onLeft');
+        console.log('Left');
 
         if( this.state.currentSlideNum > 1 ) {
 
-            console.log('Decrement from ' + this.state.currentSlideNum + ' to ' + (this.state.currentSlideNum - 1));
-
             this.setState({currentSlideNum: this.state.currentSlideNum - 1});
-
-            console.log('this.state.currentSlideNum', this.state.currentSlideNum);
 
         }
 
         console.log('this.state.currentSlideNum', this.state.currentSlideNum);
     }
 
-    onRight() {
+    _onRight() {
 
-        console.log('onRight');
+        console.log('Right');
 
-        if( this.state.currentSlideNum < 2 ) { // TODO max slides num
+        if( this.state.currentSlideNum < LAST_SLIDE_NUM ) {
 
             this.setState({currentSlideNum: this.state.currentSlideNum + 1});
 

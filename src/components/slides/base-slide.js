@@ -3,10 +3,10 @@ import React from 'react';
 class SlideComponent extends React.Component {
 
     constructor() {
-        this.isVisible = this.isVisible.bind(this);
+        this._isVisible = this._isVisible.bind(this);
     }
 
-    isVisible() {
+    _isVisible() {
         return this.props.currentSlideNum === this.props.slideNum
     }
 

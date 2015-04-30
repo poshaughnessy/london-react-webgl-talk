@@ -6,8 +6,9 @@ class Slide1Component extends BaseSlideComponent {
     render() {
 
         return (
-            <div className={'slide ' + (this.isVisible() ? 'show' : 'hide')}>
-                Slide 1!
+            <div className={'slide ' + (this._isVisible() ? 'show' : 'hide')}>
+                <h1>2D + 3D Web Apps: Combining React &amp; WebGL</h1>
+                <p>Peter O'Shaughnessy</p>
             </div>
         );
 
