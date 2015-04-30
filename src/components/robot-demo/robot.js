@@ -4,9 +4,7 @@ import THREE from 'three';
 
 class RobotComponent extends React.Component {
 
-    constructor(props) {
-
-        super(props);
+    constructor() {
 
         this.displayName = 'Robot';
 

@@ -1,94 +1,86 @@
 import React from 'react';
-import ReactTHREE from 'react-three';
-import RobotComponent from './robot';
-import THREE from 'three';
+import Slide1 from './slides/1-intro';
+import Slide2 from './slides/2-two';
 
 class AppComponent extends React.Component {
 
     constructor(props) {
 
-        super(props);
-
         this.state = {
-            robotLoaded: false
+            currentSlideNum: props.initialSlideNum
         };
 
-        this.onRobotLoaded = this.onRobotLoaded.bind(this);
+        this.onKeyUp = this.onKeyUp.bind(this);
+        this.onLeft = this.onLeft.bind(this);
+        this.onRight = this.onRight.bind(this);
+
+    }
+
+    componentDidMount() {
+        document.addEventListener('keyup', this.onKeyUp);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keyup', this.onKeyUp);
     }
 
     render() {
-
-        let CameraElement = React.createElement(
-            ReactTHREE.PerspectiveCamera,   // type
-            {                               // config
-                name: 'camera',
-                fov: 75,
-                aspect: window.innerWidth / window.innerHeight,
-                near: 1,
-                far: 1000,
-                position: new THREE.Vector3(0, 0, 100),
-                lookat: new THREE.Vector3(0, 0, 0)
-            }
-        );
-
-        let RobotElement = React.createElement(
-            RobotComponent,
-            {
-                onLoad: this.onRobotLoaded,
-                position: this.props.robotPosition || new THREE.Vector3(0,0,0)
-            }
-        );
-
-        let AmbientLight = React.createElement(
-            ReactTHREE.AmbientLight,
-            {
-                color: new THREE.Color(0x333333),
-                intensity: 0.5,
-                position: new THREE.Vector3(0, 0, 600),
-                target: new THREE.Vector3(0, 0, 0)
-            }
-        );
-
-        let DirectionalLight = React.createElement(
-            ReactTHREE.DirectionalLight,
-            {
-                color: new THREE.Color(0xFFFFFF),
-                intensity: 1.5,
-                position: new THREE.Vector3(0, 0, 60)
-            }
-        );
-
-        let SpotLight = React.createElement(
-            ReactTHREE.SpotLight,
-            {
-                position: new THREE.Vector3(0, 0, 100)
-            }
-        );
-
-        return React.createElement(
-            ReactTHREE.Scene,
-            {
-                width: window.innerWidth,
-                height: window.innerHeight,
-                camera: 'camera',
-                antialias: true,
-                background: 0xFFFFFF
-            },
-            CameraElement,
-            RobotElement,
-            AmbientLight,
-            DirectionalLight,
-            SpotLight
+        return (
+            <div>
+                <Slide1 slideNum={1} currentSlideNum={this.state.currentSlideNum}/>
+                <Slide2 slideNum={2} currentSlideNum={this.state.currentSlideNum}/>
+            </div>
         )
     }
 
-    onRobotLoaded() {
-        this.setState({robotLoaded: true});
+    onKeyUp(e) {
+
+        console.log('onKeyUp', e);
+
+        switch( e.keyCode ) {
+            case 37: // left arrow
+                this.onLeft();
+                break;
+            case 39: // right arrow
+                this.onRight();
+                break;
+        }
     }
+
+    onLeft() {
+
+        console.log('onLeft');
+
+        if( this.state.currentSlideNum > 1 ) {
+
+            console.log('Decrement from ' + this.state.currentSlideNum + ' to ' + (this.state.currentSlideNum - 1));
+
+            this.setState({currentSlideNum: this.state.currentSlideNum - 1});
+
+            console.log('this.state.currentSlideNum', this.state.currentSlideNum);
+
+        }
+
+        console.log('this.state.currentSlideNum', this.state.currentSlideNum);
+    }
+
+    onRight() {
+
+        console.log('onRight');
+
+        if( this.state.currentSlideNum < 2 ) { // TODO max slides num
+
+            this.setState({currentSlideNum: this.state.currentSlideNum + 1});
+
+        }
+
+        console.log('this.state.currentSlideNum', this.state.currentSlideNum);
+    }
+
 }
 
 AppComponent.propTypes = {
-    robotPosition: React.PropTypes.instanceOf(THREE.Vector3)
+    initialSlideNum: React.PropTypes.number
 };
 
 export default AppComponent;
