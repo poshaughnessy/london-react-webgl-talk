@@ -10,11 +10,9 @@ class MonsterComponent extends React.Component {
 
         let loader = new THREE.JSONLoader();
 
-        console.log('Loading...');
-
         loader.load('/models/monster/monster.js', (geometry, materials) => {
 
-            console.log('Loaded!', geometry, materials);
+            console.log('Loaded monster', geometry, materials);
 
             this.geometry = geometry;
             this.material = materials[0];
@@ -39,10 +37,6 @@ class MonsterComponent extends React.Component {
     }
 
 }
-
-
-console.log('THREE', THREE);
-
 
 MonsterComponent.propTypes = {
     position: React.PropTypes.instanceOf(THREE.Vector3)

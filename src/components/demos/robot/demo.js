@@ -21,15 +21,11 @@ class RobotDemoComponent extends React.Component {
     }
 
     componentDidMount() {
-        this.rAF = requestAnimationFrame(this._animate);
+        this._requestAnimation();
     }
 
     componentWillUnmount() {
-
-        if( this.rAF ) {
-            cancelAnimationFrame(this.rAF);
-        }
-
+        this._cancelAnimation();
     }
 
     render() {
@@ -133,8 +129,19 @@ class RobotDemoComponent extends React.Component {
 
         }
 
-        requestAnimationFrame( this._animate );
+        // TODO See if we can call animate again only once we know something has changed - for efficiency
+        this._requestAnimation();
 
+    }
+
+    _requestAnimation() {
+        this.rAF = requestAnimationFrame( this._animate );
+    }
+
+    _cancelAnimation() {
+        if( this.rAF ) {
+            cancelAnimationFrame(this.rAF);
+        }
     }
 
 }

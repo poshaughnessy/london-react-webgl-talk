@@ -9,6 +9,5 @@
     "bower_components"
   ],
   "dependencies": {
-    "stats.js": "*"
   }
 }
