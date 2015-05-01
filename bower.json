@@ -1,0 +1,14 @@
+{
+  "name": "london-react-webgl-talk",
+  "version": "0.0.1",
+  "authors": [
+    "Peter O'Shaughnessy"
+  ],
+  "private": true,
+  "ignore": [
+    "bower_components"
+  ],
+  "dependencies": {
+    "stats.js": "*"
+  }
+}
