@@ -1,21 +1,19 @@
 import React from 'react';
 import ReactTHREE from 'react-three';
-import RobotComponent from './robot';
+import MonsterComponent from './monster';
 import THREE from 'three';
 
-const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-const cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
-const ROBOT_Z_NEAR = 50;
-const ROBOT_Z_FAR = 0;
-const ROBOT_MOVE_RATE = 0.1;
+const MONSTER_Z_NEAR = 50;
+const MONSTER_Z_FAR = 0;
+const MONSTER_MOVE_RATE = 0.1;
 
-class RobotDemoComponent extends React.Component {
+class MonsterDemoComponent extends React.Component {
 
     constructor() {
 
         this.state = {
-            robotPosition: new THREE.Vector3(0,-35,0),
-            robotMovingForwards: true
+            monsterPosition: new THREE.Vector3(-20,-15,0),
+            monsterMovingForwards: true
         };
 
         this._animate = this._animate.bind(this);
@@ -49,10 +47,10 @@ class RobotDemoComponent extends React.Component {
             }
         );
 
-        let RobotElement = React.createElement(
-            RobotComponent,
+        let MonsterElement = React.createElement(
+            MonsterComponent,
             {
-                position: this.state.robotPosition
+                position: this.state.monsterPosition
             }
         );
 
@@ -92,7 +90,7 @@ class RobotDemoComponent extends React.Component {
                 background: 0xFFFFFF
             },
             CameraElement,
-            RobotElement,
+            MonsterElement,
             AmbientLight,
             DirectionalLight,
             SpotLight
@@ -103,32 +101,32 @@ class RobotDemoComponent extends React.Component {
 
         if( this.props.animating ) {
 
-            let robotZ = this.state.robotPosition.z;
+            let monsterZ = this.state.monsterPosition.z;
 
-            if (this.state.robotMovingForwards) {
+            if (this.state.monsterMovingForwards) {
 
-                if (robotZ < ROBOT_Z_NEAR) {
+                if (monsterZ < MONSTER_Z_NEAR) {
 
-                    let newPosition = this.state.robotPosition;
-                    newPosition.z += ROBOT_MOVE_RATE;
+                    let newPosition = this.state.monsterPosition;
+                    newPosition.z += MONSTER_MOVE_RATE;
 
-                    this.setState({robotPosition: newPosition});
+                    this.setState({monsterPosition: newPosition});
 
                 } else {
-                    this.setState({robotMovingForwards: false});
+                    this.setState({monsterMovingForwards: false});
                 }
 
             } else {
 
-                if (robotZ > ROBOT_Z_FAR) {
+                if (monsterZ > MONSTER_Z_FAR) {
 
-                    let newPosition = this.state.robotPosition;
-                    newPosition.z -= ROBOT_MOVE_RATE;
+                    let newPosition = this.state.monsterPosition;
+                    newPosition.z -= MONSTER_MOVE_RATE;
 
-                    this.setState({robotPosition: newPosition});
+                    this.setState({monsterPosition: newPosition});
 
                 } else {
-                    this.setState({robotMovingForwards: true});
+                    this.setState({monsterMovingForwards: true});
                 }
 
             }
@@ -141,8 +139,8 @@ class RobotDemoComponent extends React.Component {
 
 }
 
-RobotDemoComponent.propTypes = {
+MonsterDemoComponent.propTypes = {
     animating: React.PropTypes.bool
 };
 
-export default RobotDemoComponent;
+export default MonsterDemoComponent;

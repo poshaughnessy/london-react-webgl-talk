@@ -1,14 +1,14 @@
 import React from 'react';
 import BaseSlideComponent from './base-slide';
-import RobotDemo from '../demos/robot/demo';
+import MonsterDemo from '../demos/monster/demo';
 
-class Slide2Component extends BaseSlideComponent {
+class Slide3Component extends BaseSlideComponent {
 
     render() {
 
         return (
             <div className={'slide ' + (this._isVisible() ? 'show' : 'hide')}>
-                <RobotDemo animating={this._isVisible()}/>
+                <MonsterDemo animating={this._isVisible()}/>
                 <div className="contents top">
                     <h2>Demo</h2>
                 </div>
@@ -19,4 +19,4 @@ class Slide2Component extends BaseSlideComponent {
 
 }
 
-export default Slide2Component;
+export default Slide3Component;

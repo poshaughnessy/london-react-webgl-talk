@@ -1,8 +1,9 @@
 import React from 'react';
 import Slide1 from './slides/1-intro';
 import Slide2 from './slides/2-two';
+import Slide3 from './slides/3-three';
 
-const LAST_SLIDE_NUM = 2;
+const LAST_SLIDE_NUM = 3;
 
 class AppComponent extends React.Component {
 
@@ -31,6 +32,7 @@ class AppComponent extends React.Component {
             <div>
                 <Slide1 slideNum={1} currentSlideNum={this.state.currentSlideNum}/>
                 <Slide2 slideNum={2} currentSlideNum={this.state.currentSlideNum}/>
+                <Slide3 slideNum={3} currentSlideNum={this.state.currentSlideNum}/>
             </div>
         )
     }
