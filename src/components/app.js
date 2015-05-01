@@ -2,6 +2,7 @@ import React from 'react';
 import SlideTitle from './slides/title';
 import SlideApocIntro from './slides/apoc-intro';
 import SlideDontDoThis1 from './slides/dont-do-this-1';
+import SlideReactThreeIntro from './slides/react-three-intro';
 import SlideRobot from './slides/robot';
 import SlideMonster from './slides/monster';
 
@@ -9,6 +10,7 @@ const SLIDES = [
     SlideTitle,
     SlideApocIntro,
     SlideDontDoThis1,
+    SlideReactThreeIntro,
     SlideRobot,
     SlideMonster
 ];

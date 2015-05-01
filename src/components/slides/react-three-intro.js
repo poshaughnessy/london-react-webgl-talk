@@ -8,15 +8,8 @@ export default class SlideComponent extends BaseSlideComponent {
         return (
             <div className={this._getSlideClassName()}>
                 <div className="contents">
-                    <h2>First Method</h2>
-                    <pre>
-                        <code>
-                        {'componentDidMount: function() {\n' +
-                        '  ...\n' +
-                        '  Scene.init(this);\n' +
-                        '}'}
-                        </code>
-                    </pre>
+                    <h2>react-three</h2>
+                    <p><a href="https://github.com/Izzimach/react-three">github.com/Izzimach/react-three</a></p>
                 </div>
             </div>
         );
