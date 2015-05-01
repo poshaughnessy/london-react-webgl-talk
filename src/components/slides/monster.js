@@ -2,12 +2,12 @@ import React from 'react';
 import BaseSlideComponent from './base-slide';
 import MonsterDemo from '../demos/monster/demo';
 
-class Slide3Component extends BaseSlideComponent {
+export default class SlideComponent extends BaseSlideComponent {
 
     render() {
 
         return (
-            <div className={'slide ' + (this._isVisible() ? 'show' : 'hide')}>
+            <div className={this._getSlideClassName()}>
                 <MonsterDemo animating={this._isVisible()}/>
                 <div className="contents top">
                     <h2>Monster</h2>
@@ -18,5 +18,3 @@ class Slide3Component extends BaseSlideComponent {
     }
 
 }
-
-export default Slide3Component;

@@ -1,9 +1,17 @@
 import React from 'react';
-import Slide1 from './slides/1-intro';
-import Slide2 from './slides/2-two';
-import Slide3 from './slides/3-three';
+import SlideTitle from './slides/title';
+import SlideApocIntro from './slides/apoc-intro';
+import SlideDontDoThis1 from './slides/dont-do-this-1';
+import SlideRobot from './slides/robot';
+import SlideMonster from './slides/monster';
 
-const LAST_SLIDE_NUM = 3;
+const SLIDES = [
+    SlideTitle,
+    SlideApocIntro,
+    SlideDontDoThis1,
+    SlideRobot,
+    SlideMonster
+];
 
 class AppComponent extends React.Component {
 
@@ -28,13 +36,17 @@ class AppComponent extends React.Component {
     }
 
     render() {
+
+        let slideElements = [];
+
+        SLIDES.forEach((slide, index) => {
+            slideElements.push( React.createElement(slide, {slideNum: index+1, currentSlideNum: this.state.currentSlideNum}) );
+        });
+
         return (
-            <div>
-                <Slide1 slideNum={1} currentSlideNum={this.state.currentSlideNum}/>
-                <Slide2 slideNum={2} currentSlideNum={this.state.currentSlideNum}/>
-                <Slide3 slideNum={3} currentSlideNum={this.state.currentSlideNum}/>
-            </div>
-        )
+            React.createElement('div', {}, slideElements)
+        );
+
     }
 
     _onKeyUp(e) {
@@ -68,7 +80,7 @@ class AppComponent extends React.Component {
 
         console.log('Right');
 
-        if( this.state.currentSlideNum < LAST_SLIDE_NUM ) {
+        if( this.state.currentSlideNum < SLIDES.length ) {
 
             this.setState({currentSlideNum: this.state.currentSlideNum + 1});
 

@@ -10,6 +10,10 @@ class BaseSlideComponent extends React.Component {
         return this.props.currentSlideNum === this.props.slideNum
     }
 
+    _getSlideClassName() {
+        return 'slide ' + (this._isVisible() ? 'show' : 'hide');
+    }
+
 }
 
 BaseSlideComponent.propTypes = {

@@ -22,7 +22,7 @@ class MonsterDemoComponent extends BaseAnimatingDemoComponent {
     }
 
     render() {
-        
+
         let CameraElement = React.createElement(
             ReactTHREE.PerspectiveCamera,   // type
             {                               // config
