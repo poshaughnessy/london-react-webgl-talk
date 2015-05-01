@@ -2,38 +2,27 @@ import React from 'react';
 import ReactTHREE from 'react-three';
 import MonsterComponent from './monster';
 import THREE from 'three';
+import BaseAnimatingDemoComponent from '../base-animating-demo';
 
 const MONSTER_Z_NEAR = 50;
 const MONSTER_Z_FAR = 0;
 const MONSTER_MOVE_RATE = 0.1;
 
-class MonsterDemoComponent extends React.Component {
+class MonsterDemoComponent extends BaseAnimatingDemoComponent {
 
     constructor() {
+
+        super();
 
         this.state = {
             monsterPosition: new THREE.Vector3(-20,-15,0),
             monsterMovingForwards: true
         };
 
-        this._animate = this._animate.bind(this);
-
-    }
-
-    componentDidMount() {
-        this.rAF = requestAnimationFrame(this._animate);
-    }
-
-    componentWillUnmount() {
-
-        if( this.rAF ) {
-            cancelAnimationFrame(this.rAF);
-        }
-
     }
 
     render() {
-
+        
         let CameraElement = React.createElement(
             ReactTHREE.PerspectiveCamera,   // type
             {                               // config
@@ -99,48 +88,42 @@ class MonsterDemoComponent extends React.Component {
 
     _animate() {
 
-        if( this.props.animating ) {
+        let monsterZ = this.state.monsterPosition.z;
 
-            let monsterZ = this.state.monsterPosition.z;
+        if (this.state.monsterMovingForwards) {
 
-            if (this.state.monsterMovingForwards) {
+            if (monsterZ < MONSTER_Z_NEAR) {
 
-                if (monsterZ < MONSTER_Z_NEAR) {
+                let newPosition = this.state.monsterPosition;
+                newPosition.z += MONSTER_MOVE_RATE;
 
-                    let newPosition = this.state.monsterPosition;
-                    newPosition.z += MONSTER_MOVE_RATE;
-
-                    this.setState({monsterPosition: newPosition});
-
-                } else {
-                    this.setState({monsterMovingForwards: false});
-                }
+                this.setState({monsterPosition: newPosition});
 
             } else {
+                this.setState({monsterMovingForwards: false});
+            }
 
-                if (monsterZ > MONSTER_Z_FAR) {
+        } else {
 
-                    let newPosition = this.state.monsterPosition;
-                    newPosition.z -= MONSTER_MOVE_RATE;
+            if (monsterZ > MONSTER_Z_FAR) {
 
-                    this.setState({monsterPosition: newPosition});
+                let newPosition = this.state.monsterPosition;
+                newPosition.z -= MONSTER_MOVE_RATE;
 
-                } else {
-                    this.setState({monsterMovingForwards: true});
-                }
+                this.setState({monsterPosition: newPosition});
 
+            } else {
+                this.setState({monsterMovingForwards: true});
             }
 
         }
 
-        requestAnimationFrame( this._animate );
+        if( this.props.animating ) {
+            this._requestAnimation();
+        }
 
     }
 
 }
-
-MonsterDemoComponent.propTypes = {
-    animating: React.PropTypes.bool
-};
 
 export default MonsterDemoComponent;

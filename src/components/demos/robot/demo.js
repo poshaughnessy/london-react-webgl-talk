@@ -2,30 +2,23 @@ import React from 'react';
 import ReactTHREE from 'react-three';
 import RobotComponent from './robot';
 import THREE from 'three';
+import BaseAnimatingDemoComponent from '../base-animating-demo';
 
 const ROBOT_Z_NEAR = 50;
 const ROBOT_Z_FAR = 0;
 const ROBOT_MOVE_RATE = 0.1;
 
-class RobotDemoComponent extends React.Component {
+class RobotDemoComponent extends BaseAnimatingDemoComponent {
 
     constructor() {
+
+        super();
 
         this.state = {
             robotPosition: new THREE.Vector3(0,-35,0),
             robotMovingForwards: true
         };
 
-        this._animate = this._animate.bind(this);
-
-    }
-
-    componentDidMount() {
-        this._requestAnimation();
-    }
-
-    componentWillUnmount() {
-        this._cancelAnimation();
     }
 
     render() {
@@ -95,59 +88,42 @@ class RobotDemoComponent extends React.Component {
 
     _animate() {
 
-        if( this.props.animating ) {
+        let robotZ = this.state.robotPosition.z;
 
-            let robotZ = this.state.robotPosition.z;
+        if (this.state.robotMovingForwards) {
 
-            if (this.state.robotMovingForwards) {
+            if (robotZ < ROBOT_Z_NEAR) {
 
-                if (robotZ < ROBOT_Z_NEAR) {
+                let newPosition = this.state.robotPosition;
+                newPosition.z += ROBOT_MOVE_RATE;
 
-                    let newPosition = this.state.robotPosition;
-                    newPosition.z += ROBOT_MOVE_RATE;
-
-                    this.setState({robotPosition: newPosition});
-
-                } else {
-                    this.setState({robotMovingForwards: false});
-                }
+                this.setState({robotPosition: newPosition});
 
             } else {
+                this.setState({robotMovingForwards: false});
+            }
 
-                if (robotZ > ROBOT_Z_FAR) {
+        } else {
 
-                    let newPosition = this.state.robotPosition;
-                    newPosition.z -= ROBOT_MOVE_RATE;
+            if (robotZ > ROBOT_Z_FAR) {
 
-                    this.setState({robotPosition: newPosition});
+                let newPosition = this.state.robotPosition;
+                newPosition.z -= ROBOT_MOVE_RATE;
 
-                } else {
-                    this.setState({robotMovingForwards: true});
-                }
+                this.setState({robotPosition: newPosition});
 
+            } else {
+                this.setState({robotMovingForwards: true});
             }
 
         }
 
-        // TODO See if we can call animate again only once we know something has changed - for efficiency
-        this._requestAnimation();
-
-    }
-
-    _requestAnimation() {
-        this.rAF = requestAnimationFrame( this._animate );
-    }
-
-    _cancelAnimation() {
-        if( this.rAF ) {
-            cancelAnimationFrame(this.rAF);
+        if( this.props.animating ) {
+            this._requestAnimation();
         }
+
     }
 
 }
-
-RobotDemoComponent.propTypes = {
-    animating: React.PropTypes.bool
-};
 
 export default RobotDemoComponent;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SlideComponent extends React.Component {
+class BaseSlideComponent extends React.Component {
 
     constructor() {
         this._isVisible = this._isVisible.bind(this);
@@ -12,9 +12,9 @@ class SlideComponent extends React.Component {
 
 }
 
-SlideComponent.propTypes = {
+BaseSlideComponent.propTypes = {
     currentSlideNum: React.PropTypes.number,
     slideNum: React.PropTypes.number
 };
 
-export default SlideComponent;
+export default BaseSlideComponent;
