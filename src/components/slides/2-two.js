@@ -10,7 +10,7 @@ class Slide2Component extends BaseSlideComponent {
             <div className={'slide ' + (this._isVisible() ? 'show' : 'hide')}>
                 <RobotDemo animating={this._isVisible()}/>
                 <div className="contents top">
-                    <h2>Demo</h2>
+                    <h2>Robot</h2>
                 </div>
             </div>
         );

@@ -10,7 +10,7 @@ class Slide3Component extends BaseSlideComponent {
             <div className={'slide ' + (this._isVisible() ? 'show' : 'hide')}>
                 <MonsterDemo animating={this._isVisible()}/>
                 <div className="contents top">
-                    <h2>Demo</h2>
+                    <h2>Monster</h2>
                 </div>
             </div>
         );
