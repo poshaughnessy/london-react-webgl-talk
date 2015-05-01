@@ -31,16 +31,12 @@ class RobotComponent extends React.Component {
 
     render() {
 
-        return React.createElement(
-            ReactTHREE.Object3D,
-            {},
-            React.createElement( ReactTHREE.Mesh, {
-                geometry: this.geometry,
-                material: this.material,
-                position: this.props.position || new THREE.Vector3(0,0,0),
-                scale: 8
-            })
-        );
+        return React.createElement( ReactTHREE.Mesh, {
+            geometry: this.geometry,
+            material: this.material,
+            position: this.props.position || new THREE.Vector3(0,0,0),
+            scale: 8
+        });
 
     }
 

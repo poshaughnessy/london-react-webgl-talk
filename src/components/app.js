@@ -5,8 +5,10 @@ import SlideDontDoThis1 from './slides/dont-do-this-1';
 import SlideReactThreeIntro from './slides/react-three-intro';
 import SlideRobot from './slides/robot';
 import SlideMonster from './slides/monster';
+import SlideSkinned from './slides/skinned';
 
 const SLIDES = [
+    SlideSkinned,
     SlideTitle,
     SlideApocIntro,
     SlideDontDoThis1,
