@@ -3,7 +3,7 @@ import AppComponent from './components/app';
 import THREE from 'three';
 
 let appProps = {
-    initialSlideNum: 1  // Later we might initialiseSlideNum from URL hash etc.
+    initialSlideNum: 1  // Later we might initialise initialSlideNum from URL hash etc.
 };
 
 React.render(

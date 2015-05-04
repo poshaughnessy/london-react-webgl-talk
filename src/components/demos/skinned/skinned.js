@@ -23,7 +23,7 @@ class SkinnedComponent extends React.Component {
 
     render() {
 
-        // Can't create a SkinnedMesh until we have a geometry & material
+        // Can't create a SkinnedMesh until we have a geometry & material?
         if( this.geometry ) {
 
             return React.createElement( ReactTHREE.SkinnedMesh, {
