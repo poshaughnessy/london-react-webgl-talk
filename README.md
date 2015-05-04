@@ -3,3 +3,8 @@
 A presentation I'm preparing for the London React meetup group, May 2015.
 
 Coming soon...
+
+### Instructions
+
+Arrow keys to change slides <- ->
+
