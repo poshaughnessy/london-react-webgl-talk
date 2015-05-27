@@ -8,13 +8,13 @@ import SlideMonster from './slides/monster';
 import SlideSkinned from './slides/skinned';
 
 const SLIDES = [
-    SlideSkinned,
     SlideTitle,
     SlideApocIntro,
     SlideDontDoThis1,
     SlideReactThreeIntro,
     SlideRobot,
-    SlideMonster
+    SlideMonster,
+    SlideSkinned
 ];
 
 class AppComponent extends React.Component {
